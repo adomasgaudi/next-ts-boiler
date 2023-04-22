@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import tw, { theme } from "twin.macro";
-import Header from "../app/bones/layout/Header";
+import Header from "../layout/Header";
 import { ContainX } from "../share/bones/components/Contain";
 import Head from "../share/bones/components/Head";
 
