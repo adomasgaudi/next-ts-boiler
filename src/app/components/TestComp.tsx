@@ -12,23 +12,24 @@ const PP = ({ children }: any) => (
 const Text = styled.h1`
   color: red;
 `;
+
+const Text2 = styled.h1`
+color: ${({ theme }) => theme.textCol};
+`;
+const Tailwind = styled.h1`
+${tw`text-red-400`}
+`;
+const TW = tw.h1`
+text-red-700
+`;
+const E800 = styled.h1`
+${tw`text-red-400 `}
+`;
+
 // const PropsStyle = styled.input<any>(({ hasBorder }) => [
 //   `color: red;`,
 //   hasBorder && tw`border-red-800`,
 // ]);
-
-const Text2 = styled.h1`
-  color: ${({ theme }) => theme.textCol};
-`;
-const Tailwind = styled.h1`
-  ${tw`text-red-400`}
-`;
-const TW = tw.h1`
-  text-red-700
-`;
-const E800 = styled.h1`
-  ${tw`text-red-400 `}
-`;
 
 const Test = () => {
     return( 
