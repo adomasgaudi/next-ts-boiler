@@ -1,26 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 interface prop {
-  theme: number;
-  scroll: number;
+  theme: number
+  scroll: number
 }
 const initialState: prop = {
   theme: 0,
   scroll: 0,
-};
+}
 const uiSlice = createSlice({
-  name: "ui",
+  name: 'ui',
   initialState,
   reducers: {
     changeTheme: (state, action: PayloadAction<number>) => {
-      state.theme = action.payload;
+      state.theme = action.payload
     },
     changeScroll: (state, action: PayloadAction<any>) => {
-      state.scroll = action.payload;
+      state.scroll = action.payload
     },
   },
-});
+})
 
-export const { changeTheme, changeScroll } =
-  uiSlice.actions;
-export default uiSlice;
+export const { changeTheme, changeScroll }
+  = uiSlice.actions
+export default uiSlice

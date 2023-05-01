@@ -1,17 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: { loggedIn: boolean } = {
   loggedIn: true,
-};
+}
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     changeLogin: (state, action: PayloadAction<boolean>) => {
-      state.loggedIn = action.payload;
+      state.loggedIn = action.payload
     },
   },
-});
+})
 
-export const { changeLogin } = authSlice.actions;
-export default authSlice;
+export const { changeLogin } = authSlice.actions
+export default authSlice

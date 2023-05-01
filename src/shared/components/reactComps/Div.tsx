@@ -1,22 +1,20 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { base } from "../utils/tools/baseHOC";
-import { Contain } from "./Contain";
+import React from 'react'
+import styled from 'styled-components'
+import { base } from '../utils/tools/baseHOC'
 
-const FiftyFiftyRight = ({ children, ...props }: any) => {
-  return <div {...props}>{children}</div>;
-};
-const FiftyFiftyLeft = ({ children, ...props }: any) => {
-  return <div {...props}> {children}</div>;
-};
+function FiftyFiftyRight({ children, ...props }: any) {
+  return <div {...props}>{children}</div>
+}
+function FiftyFiftyLeft({ children, ...props }: any) {
+  return <div {...props}> {children}</div>
+}
 
 const R = base(FiftyFiftyRight, {
-  className: "w-full md:w-[50%] ",
-});
+  className: 'w-full md:w-[50%] ',
+})
 const L = base(FiftyFiftyLeft, {
-  className: "w-full md:w-[50%] justify-center items-center",
-});
+  className: 'w-full md:w-[50%] justify-center items-center',
+})
 
 const S = styled.div<any>(({ size }) => [
   `
@@ -25,7 +23,7 @@ const S = styled.div<any>(({ size }) => [
     width: ${size}%;
   }
   `,
-]);
+])
 
 export const Div = {
   S50: {
@@ -33,4 +31,4 @@ export const Div = {
     L,
   },
   S,
-};
+}

@@ -3,18 +3,21 @@ const props = defineProps({
   pad: String,
   classIn: String,
   classOut: String,
-});
+})
 </script>
 
 <template>
   <main :class="`flex justify-center ${classOut ?? ' '}`">
-    <div :class="'container xl:w-[1124]'">
+    <div class="container xl:w-[1124]">
       <div :class="pad ?? ' '">
-        <div :class="classIn ?? ' '"><slot /></div>
+        <div :class="classIn ?? ' '">
+          <slot />
+        </div>
       </div>
     </div>
   </main>
 </template>
+
 <style></style>
 
 export const H800p3 = base(Contain, { classOut: "min-h-[800px]", pad: "px-2

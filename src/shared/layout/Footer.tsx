@@ -1,7 +1,7 @@
-import React from "react";
-import { Logo } from "./Header.styles";
+import React from 'react'
+import { Logo } from './Header.styles'
 
-const Footer = () => {
+function Footer() {
   return (
     <>
       <div className="h-[300px] " />
@@ -10,13 +10,13 @@ const Footer = () => {
           <div className="flex flex-col justify-center items-center gap-3">
             <Logo />
             <p className="text-gray-300 font-bold">
-              {`Be careful children, that's a lot of sodium`}
+              {'Be careful children, that\'s a lot of sodium'}
             </p>
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

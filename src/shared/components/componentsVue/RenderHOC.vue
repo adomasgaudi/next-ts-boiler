@@ -1,30 +1,30 @@
 <script setup>
-export const renderHOC = (DefComp: any, propsBASE: any) => {
+export function renderHOC(DefComp: any, propsBASE: any) {
   const MyComponent = ({ ...propsNEW }) => {
-    const propsCOMBO: any = {};
+    const propsCOMBO: any = {}
 
     // check base keys
     Object.keys(propsBASE).map((key: any) => {
-      propsCOMBO[key] = propsBASE[key];
-      if (propsNEW[key]) {
-        propsCOMBO[key] = `${propsBASE[key]} ${propsNEW[key]}`;
-      }
-      return null;
-    });
+      propsCOMBO[key] = propsBASE[key]
+      if (propsNEW[key])
+        propsCOMBO[key] = `${propsBASE[key]} ${propsNEW[key]}`
+
+      return null
+    })
 
     // check new keys
     Object.keys(propsNEW).map((key: any) => {
-      if (!propsBASE[key]) {
-        propsCOMBO[key] = propsNEW[key];
-      }
+      if (!propsBASE[key])
+        propsCOMBO[key] = propsNEW[key]
 
-      return null;
-    });
+      return null
+    })
 
-    return <DefComp {...propsCOMBO} />;
-  };
+    return <DefComp {...propsCOMBO} />
+  }
 
-  return MyComponent;
-};
+  return MyComponent
+}
 </script>
-<template></template>
+
+<template />

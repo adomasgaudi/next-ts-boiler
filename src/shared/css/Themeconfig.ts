@@ -1,26 +1,22 @@
-import { createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from 'styled-components'
 
-
-
-export const themeFn = (font, col) => {
-
-  const fonts = ["m", "inter"]
-  const colors = ["#333", "#f00"]
+export function themeFn(font, col) {
+  const fonts = ['m', 'inter']
+  const colors = ['#333', '#f00']
 
   const theme: any = {
     font: fonts[font],
     fontS: {
-      min: "m",
-      inter: "inter"
+      min: 'm',
+      inter: 'inter',
     },
-    textCol: colors[col]
-  };
+    textCol: colors[col],
+  }
   return theme
-
 }
 
 export const GlobalStyles = createGlobalStyle`
   /* body {
-    color: ${({theme}: any) => theme.textCol};
+    color: ${({ theme }: any) => theme.textCol};
   } */
 `

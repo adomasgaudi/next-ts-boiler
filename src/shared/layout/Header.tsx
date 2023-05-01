@@ -1,13 +1,13 @@
-import Link from "next/link";
-import React, { FC, useState } from "react";
-import tw from "twin.macro";
+import Link from 'next/link'
+import type { FC } from 'react'
+import React, { useState } from 'react'
 
-type Props = {};
+interface Props {}
 
 const Header: FC<Props> = () => {
-  const handleLogin = () => {};
-  const handleLogout = () => {};
-  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+  const handleLogin = () => {}
+  const handleLogout = () => {}
+  const [loggedIn, setLoggedIn] = useState<boolean>(true)
   return (
     <>
       <header className="bg-white w-full z-10 mb-20">
@@ -27,13 +27,13 @@ const Header: FC<Props> = () => {
             className="shadowHov_thick rounded-md py-1 px-3 font_btn_1"
             onClick={handleLogout}
           >
-            {loggedIn ? "Log Out" : "Log In"}
+            {loggedIn ? 'Log Out' : 'Log In'}
           </button>
         </div>
       </header>
       <div tw="w-full h-32 " />
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
