@@ -2,7 +2,9 @@
   "extends": "@antfu",
   "rules": {
     "indent": ["error", 2],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "no-console": "warn"
+
     // Additional, per-project rules...
   }
 }
