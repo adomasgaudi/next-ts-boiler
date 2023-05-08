@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "@antfu",
+  "rules": {
+    "indent": ["warn", 2],
+    "semi": ["warn", "never"],
+    "no-console": "warn"
+  }
 }
