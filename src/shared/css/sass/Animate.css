@@ -1,15 +1,28 @@
 /*=== Trigger  ===*/
 .animate, .fadeInUp {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
 }
 
 /*=== Optional Delays, change values here  ===*/
 .one {
-  animation-delay: 0s;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
 }
 
 /*==== FADE IN UP ===*/
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -21,5 +34,6 @@
   }
 }
 .fadeInUp {
-  animation-name: fadeInUp;
-}/*# sourceMappingURL=Animate.css.map */
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+}
