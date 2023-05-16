@@ -1,8 +1,32 @@
 {
-  "extends": "@antfu",
+  "extends": [
+    "@antfu",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "indent": ["warn", 2],
-    "semi": ["warn", "never"],
-    "no-console": "warn"
+    "indent": [
+      "warn",
+      2
+    ],
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 3,
+        "when": "multiline"
+      }
+    ],
+    "no-console": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/no-unknown-property": "off",
+    "react/no-unescaped-entities": "off",
+    "antfu/top-level-function": "off",
+    "eslint-comments/no-unlimited-disable": "off"
   }
 }

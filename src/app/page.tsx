@@ -1,17 +1,20 @@
 'use client'
-import { useState } from 'react'
+import { useState } from 'react' // eslint-disable-next-line
 import tw from 'twin.macro'
-import { Container } from './components/ChunkyUI'
+import CodeBlock from './components/Chunk'
+import { Container, Div_FlexRow, Div_Popup } from './components/ChunkyUI'
+import TabsComp from './components/Tabs'
 import { useCssOutline } from './utils/useTools'
 
 function HomePage() {
   useCssOutline()
-  const [showPopup, setShowPopup] = useState(false)
+  const [isPopupShown, setIsPopupShown] = useState(false)
 
   const onHoverProps = {
-    onMouseEnter: () => setShowPopup(true),
-    onMouseLeave: () => setShowPopup(false),
+    onMouseEnter: () => setIsPopupShown(true),
+    onMouseLeave: () => setIsPopupShown(false),
   }
+
   return (
     <>
       <header tw="border-b">
@@ -25,7 +28,7 @@ function HomePage() {
       </header>
 
       <Container tw="pb-[500px]">
-        <section tw='mb-[300px]'>
+        <section tw='my-[300px]'>
           <h1 tw="text-5xl my-12">ChunkyUI</h1>
           <h2 tw="text-2xl">Rationale</h2>
           <p>CSS is disorganised.</p>
@@ -34,25 +37,44 @@ function HomePage() {
         </section>
 
         <section tw="my-10">
-          <div tw='flex flex-row '>
-            <div tw="border inline-block p-2">
-              <div tw="border w-[300px] h-10 m-2"></div>
-              <div tw="border w-[300px] h-10 m-2"></div>
-              <div tw="border w-[300px] h-10 m-2"></div>
+          <Div_FlexRow>
+            <div tw="border inline-block p-2 " {...onHoverProps}>
+              <Div_Popup {...{ isPopupShown }} tw="bg-red-300 pointer-events-none"><p>{'inline-block'}</p></Div_Popup>
+              <div tw="border" >Lorem ipsum dolor sit amet, ca.</div>
+              {Array(3).fill('').map((_, index) => (
+                <div key={index} tw="border w-[300px] h-10 my-2" ></div>
+              ))}
             </div>
-            <div {...onHoverProps} tw="mx-10 relative">
+
+            <div tw="mx-10">
               <h1 tw="text-3xl">Card with vertical blocks</h1>
               <p>show popup</p>
-              <div css={[tw`hidden absolute top-0 left-3 border border-black bg-red-400`, showPopup && tw` block `]}><p>{` <div tw="border inline-flex p-2 flex-row w-[300px]">
-              <div tw="border w-[80%] h-10 m-2"></div>
-              <div tw="border w-[20%] h-10 m-2"></div>
-            </div>`}</p></div>
               <p>card: inline-block </p>
               <p>blocks: none</p>
-              
             </div>
-          </div>
-          <div tw='flex flex-row my-[100px]'>
+          </Div_FlexRow>
+
+          <Div_FlexRow tw="my-20">
+            <div tw="border inline-block px-10 py-2 w-80" {...onHoverProps}>
+              <Div_Popup {...{ isPopupShown }} tw="bg-red-300 pointer-events-none">
+                <p>{'inline-block'}</p>
+              </Div_Popup>
+              <Container tw='border min-h-[50px]'></Container>
+            </div>
+
+            <div tw="mx-10">
+              <TabsComp />
+              <h1 tw="text-3xl">Container</h1>
+              <p>tw: container mx-auto</p>
+              <p>css: container mx-auto</p>
+              <p>Responsive content looks buggy and performs worse without breakpoints.</p>
+              <div tw='w-[500px]'>
+                <CodeBlock />
+              </div>
+            </div>
+          </Div_FlexRow>
+
+          <Div_FlexRow tw='my-[100px]'>
             <div tw="border inline-flex p-2 flex-row w-[300px]">
               <div tw="border w-[80%] h-10 m-2"></div>
               <div tw="border w-[20%] h-10 m-2"></div>
@@ -62,7 +84,7 @@ function HomePage() {
               <p>card: inline-block </p>
               <p>blocks: none</p>
             </div>
-          </div>
+          </Div_FlexRow>
         </section>
       </Container>
     </>
