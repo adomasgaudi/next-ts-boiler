@@ -12,7 +12,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <header className="border-b">
+          <div className='container mx-auto flex flex-row justify-between py-3'>
+            <h3 className="text-xl">Chunky UI</h3>
+            <ul className='flex flex-row gap-3'>
+              <li>tab 1</li>
+              <li>tab 2</li>
+            </ul>
+          </div>
+        </header>
+        <div className="container mx-auto">
+          {children}
+        </div>
+      </body>
     </html>
   )
 }
