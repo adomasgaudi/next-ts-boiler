@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Container } from './components/ChunkyUI'
 import { useCssOutline } from './utils/useTools'
 
-const CardComp = ({ name, ...props }: any) => <Link href={`/${name}`}>
+const CardComp = ({ name, link, ...props }: any) => <Link href={`/${link}`}>
   <div tw="border p-10 inline m-10 rounded-xl" {...props}>{name}</div>
 </Link>
 
@@ -23,15 +23,11 @@ function HomePage() {
 
       <Container tw="pb-[500px]">
         <section tw='my-[300px]'>
-          <h1 tw="text-5xl my-12">ChunkyUI</h1>
-          <h2 tw="text-2xl">Rationale</h2>
-          <p>CSS is disorganised.</p>
-          <p>Building css components often means re-inventing the "wheel" for each component.</p>
-          <p>Chunky UI tries to define the "wheel" such that it doesn't need to be invented ever again.</p>
+          <h1>chat</h1>
         </section>
 
         <section>
-          {['alerts', 'banners'].map((_, idx) => <CardComp key={idx} name={_} />)}
+          {[{ name: 'count of monte christo', link: 'count_of_monte_christo' }].map((_, idx) => <CardComp key={idx} name={_.name} link={_.link} />)}
         </section>
       </Container>
     </>
