@@ -2,7 +2,6 @@
 import { useRef, useState } from 'react'
 import useSWR from 'swr'
 
-
 const Form = () => {
   const messageInput = useRef<HTMLTextAreaElement | null>(null)
   const [response, setResponse] = useState<string[]>([])
@@ -12,7 +11,7 @@ const Form = () => {
 
   const handleEnter = (
     e: React.KeyboardEvent<HTMLTextAreaElement> &
-      React.FormEvent<HTMLFormElement>
+    React.FormEvent<HTMLFormElement>,
   ) => {
     if (e.key === 'Enter' && isLoading === false) {
       e.preventDefault()
@@ -25,13 +24,12 @@ const Form = () => {
     e.preventDefault()
     const message = messageInput.current?.value
     if (message !== undefined) {
-      setResponse((prev) => [...prev, message])
+      setResponse(prev => [...prev, message])
       messageInput.current!.value = ''
     }
 
-    if (!message) {
+    if (!message)
       return
-    }
 
     const response = await fetch('/api/response', {
       method: 'POST',
@@ -46,20 +44,18 @@ const Form = () => {
 
     console.log(response)
 
-    if (!response.ok) {
+    if (!response.ok)
       throw new Error(response.statusText)
-    }
 
     const data = response.body
-    if (!data) {
+    if (!data)
       return
-    }
 
     const reader = data.getReader()
     const decoder = new TextDecoder()
     let done = false
 
-    setResponse((prev) => [...prev, message])
+    setResponse(prev => [...prev, message])
 
     let currentResponse: string[] = []
     while (!done) {
@@ -68,7 +64,7 @@ const Form = () => {
       const chunkValue = decoder.decode(value)
       // currentResponse = [...currentResponse, message, chunkValue];
       currentResponse = [...currentResponse, chunkValue]
-      setResponse((prev) => [...prev.slice(0, -1), currentResponse.join('')])
+      setResponse(prev => [...prev.slice(0, -1), currentResponse.join('')])
     }
     // breaks text indent on refresh due to streaming
     // localStorage.setItem('response', JSON.stringify(currentResponse));
@@ -82,16 +78,15 @@ const Form = () => {
 
   useSWR('fetchingResponse', async () => {
     const storedResponse = localStorage.getItem('response')
-    if (storedResponse) {
+    if (storedResponse)
       setResponse(JSON.parse(storedResponse))
-    }
   })
 
   const fetcher = async () => {
     const models = await (await fetch('/api/models')).json()
     setModels(models.data)
     const modelIndex = models.data.findIndex(
-      (model: any) => model.id === 'gpt-3.5-turbo'
+      (model: any) => model.id === 'gpt-3.5-turbo',
     )
     setCurrentModel(models.data[modelIndex].id)
     return models
@@ -120,56 +115,50 @@ const Form = () => {
       <button
         onClick={handleReset}
         type='reset'
-        className='fixed top-5 right-5 p-4 rounded-md bg-white text-gray-500 dark:hover:text-gray-400 dark:hover:bg-gray-900 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent'
-      >
+        className='fixed top-5 right-5 p-4 rounded-md bg-white text-gray-500 dark:hover:text-gray-400 dark:hover:bg-gray-900 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent'>
         Clear History
       </button>
       <div className='w-full mx-2 flex flex-col items-start gap-3 pt-6 last:mb-6 md:mx-auto md:max-w-3xl'>
         {isLoading
           ? response.map((item: any, index: number) => {
-              return (
-                <div
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? 'bg-blue-500' : 'bg-gray-500'
-                  } p-3 rounded-lg`}
-                >
-                  <p>{item}</p>
-                </div>
-              )
-            })
+            return (
+              <div
+                key={index}
+                className={`${
+                  index % 2 === 0 ? 'bg-blue-500' : 'bg-gray-500'
+                } p-3 rounded-lg`}>
+                <p>{item}</p>
+              </div>
+            )
+          })
           : response
-          ? response.map((item: string, index: number) => {
+            ? response.map((item: string, index: number) => {
               return (
                 <div
                   key={index}
                   className={`${
                     index % 2 === 0 ? 'bg-blue-500' : 'bg-gray-500'
-                  } p-3 rounded-lg`}
-                >
+                  } p-3 rounded-lg`}>
                   <p>{item}</p>
                 </div>
               )
             })
-          : null}
+            : null}
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className='fixed bottom-0 w-full md:max-w-3xl bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] mb-4'
-      >
+        className='fixed bottom-0 w-full md:max-w-3xl bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] mb-4'>
         <textarea
           name='Message'
           placeholder='Type your query'
           ref={messageInput}
           onKeyDown={handleEnter}
-          className='w-full resize-none bg-transparent outline-none pt-4 pl-4 translate-y-1'
-        />
+          className='w-full resize-none bg-transparent outline-none pt-4 pl-4 translate-y-1'/>
         <button
           disabled={isLoading}
           type='submit'
-          className='border bg-white m-2'
-        >
+          className='border bg-white m-2'>
           sumbit
         </button>
       </form>
