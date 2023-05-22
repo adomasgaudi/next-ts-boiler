@@ -1,22 +1,21 @@
-import { OpenAIStream, OpenAIStreamPayload } from '@/utils/OpenAIStream'
+import type { OpenAIStreamPayload } from '@/app/utils/OpenAIStream'
+import { OpenAIStream } from '@/app/utils/OpenAIStream'
 
-type RequestData = {
+interface RequestData {
   currentModel: string
   message: string
 }
 
-if (!process.env.OPENAI_API_KEY) {
+if (!process.env.OPENAI_API_KEY)
   throw new Error('Missing env var from OpenAI')
-}
 
 export const runtime = 'edge'
 
 export async function POST(request: Request) {
   const { currentModel, message } = (await request.json()) as RequestData
 
-  if (!message) {
+  if (!message)
     return new Response('No message in the request', { status: 400 })
-  }
 
   const payload: OpenAIStreamPayload = {
     model: 'gpt-3.5-turbo',

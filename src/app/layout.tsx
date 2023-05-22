@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import './css/globals.css'
 
 export const metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
       <body>
         <header className="border-b">
           <div className='container mx-auto flex flex-row justify-between py-3'>
-            <h3 className="text-xl">Chunky UI</h3>
+            <Link href="/">
+              <h3 className="text-xl">Chunky UI</h3>
+            </Link>
             <ul className='flex flex-row gap-3'>
               <li>tab 1</li>
               <li>tab 2</li>
