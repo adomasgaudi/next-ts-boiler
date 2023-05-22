@@ -1,9 +1,9 @@
-'use client'
 import { useState } from 'react' // eslint-disable-next-line
 import tw from 'twin.macro'
 import Link from 'next/link'
 import { Container } from './components/ChunkyUI'
 import { useCssOutline } from './utils/useTools'
+import Form from '@/app/components/Form'
 
 const CardComp = ({ name, link, ...props }: any) => <Link href={`/${link}`}>
   <div tw="border p-10 inline m-10 rounded-xl" {...props}>{name}</div>
@@ -28,6 +28,9 @@ function HomePage() {
 
         <section>
           {[{ name: 'count of monte christo', link: 'count_of_monte_christo' }].map((_, idx) => <CardComp key={idx} name={_.name} link={_.link} />)}
+        </section>
+        <section>
+          <Form />
         </section>
       </Container>
     </>
