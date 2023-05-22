@@ -20,6 +20,55 @@ const Form = () => {
     }
   }
 
+  const funcgo = async () => {
+    const message = 'say hi in lithuanian'
+    if (message !== undefined) {
+      setResponse(prev => [...prev, message])
+      messageInput.current!.value = ''
+    }
+    if (!message)
+      return
+
+    const response = await fetch('/api/response', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'say hi in lithuanian',
+      }),
+    })
+    console.log('Edge function returned.')
+
+    console.log(response)
+
+    if (!response.ok)
+      throw new Error(response.statusText)
+
+    const data = response.body
+    if (!data)
+      return
+
+    const reader = data.getReader()
+    const decoder = new TextDecoder()
+    let done = false
+
+    setResponse(prev => [...prev, message])
+
+    let currentResponse: string[] = []
+    while (!done) {
+      const { value, done: doneReading } = await reader.read()
+      done = doneReading
+      const chunkValue = decoder.decode(value)
+      // currentResponse = [...currentResponse, message, chunkValue];
+      currentResponse = [...currentResponse, chunkValue]
+      setResponse(prev => [...prev.slice(0, -1), currentResponse.join('')])
+    }
+    // breaks text indent on refresh due to streaming
+    // localStorage.setItem('response', JSON.stringify(currentResponse));
+    setIsLoading(false)
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const message = messageInput.current?.value
@@ -94,23 +143,22 @@ const Form = () => {
 
   useSWR('fetchingModels', fetcher)
 
-  // const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setCurrentModel(e.target.value)
-  // }
+  const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentModel(e.target.value)
+  }
 
   return (
     <div className='flex justify-center'>
-      {/* <select
+      <select
         value={currentModel}
         onChange={handleModelChange}
-        className='w-72 fixed top-5 left-5 outline-none border-none p-4 rounded-md bg-white text-gray-500 dark:hover:text-gray-400 dark:hover:bg-gray-900'
-      >
-        {models.map((model) => (
+        className='w-72 fixed top-5 left-5 outline-none border-none p-4 rounded-md bg-white text-gray-500 dark:hover:text-gray-400 dark:hover:bg-gray-900'>
+        {models.map(model => (
           <option key={model.id} value={model.id}>
             {model.id}
           </option>
         ))}
-      </select> */}
+      </select>
 
       <button
         onClick={handleReset}
@@ -145,6 +193,8 @@ const Form = () => {
             })
             : null}
       </div>
+
+      <button onClick={funcgo}>submit now</button>
 
       <form
         onSubmit={handleSubmit}
