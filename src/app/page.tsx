@@ -17,7 +17,7 @@ function HomePage() {
         </section>
 
         <section>
-          {[{ name: 'count of monte christo', link: 'count_of_monte_christo' }].map((_, idx) => <CardComp key={idx} name={_.name} link={_.link} />)}
+          {[{ name: 'Moby Dick', link: 'moby_dick' }].map((_, idx) => <CardComp key={idx} name={_.name} link={_.link} />)}
         </section>
       </div>
     </>

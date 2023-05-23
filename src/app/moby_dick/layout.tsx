@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import './css/globals.css'
 
 export const metadata = {
   title: 'The big bad title',
@@ -14,7 +13,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header className="border-b">
+        <div className="container mx-auto">
+          {children}
+        </div>
+        <header className="border-t">
           <div className='container mx-auto flex flex-row justify-between py-3'>
             <Link href="/">
               <h3 className="text-xl">BookGPT</h3>
@@ -25,9 +27,6 @@ export default function RootLayout({
             </ul>
           </div>
         </header>
-        <div className="container mx-auto">
-          {children}
-        </div>
       </body>
     </html>
   )
